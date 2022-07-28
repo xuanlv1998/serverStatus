@@ -1,0 +1,20 @@
+version: "3"
+services:
+  sss:
+    image: cppla/serverstatus:latest
+    container_name: sss
+    restart: unless-stopped
+    volumes:
+      - ./config.json:/ServerStatus/server/config.json 
+      - ./json:/usr/share/nginx/html/json
+    ports:
+      - 35601:35601
+      - 8081:80 
+  bot:
+    build:
+      context: .
+    container_name: bot4sss
+    restart: unless-stopped
+    environment:
+      - TG_CHAT_ID=722529169
+      - TG_BOT_TOKEN=5583403187:AAETgCsXQo851aU_6Xv_sDPOyedGiIZPcxI
